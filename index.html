@@ -1,49 +1,66 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark" data-lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0c0b">
+<meta name="description" content="这是尘画的图片索引页。完整档案、许可与来源见摄影 / 绘画站；本页只做浏览入口。">
 <title>21st Century · 尘画图片索引</title>
-<link rel="stylesheet" href="gallery.css?v=1794831751">
+<link rel="alternate" hreflang="zh-CN" href="https://21century.chenhua.net/">
+<link rel="alternate" hreflang="en" href="https://21century.chenhua.net/">
+<link rel="stylesheet" href="gallery.css?v=1794837793">
+<script>
+(function(){try{var t=localStorage.getItem("chenhua-theme");if(t)document.documentElement.setAttribute("data-theme",t);
+var l=localStorage.getItem("chenhua-lang");if(l){document.documentElement.setAttribute("data-lang",l);
+document.documentElement.setAttribute("lang",l==="en"?"en":"zh-CN");}}catch(e){}})();
+</script>
 </head>
-<body>
+<body data-title-zh="21st Century · 尘画图片索引" data-title-en="21st Century · Chenhua Image Index"
+      data-desc-zh="这是尘画的图片索引页。完整档案、许可与来源见摄影 / 绘画站；本页只做浏览入口。" data-desc-en="An image index for Chenhua. The complete archive, licences and sources are on the Photography and Painting sites; this page is only an entrance.">
 <header class="g-head">
-  <div class="g-brand"><span class="wm"><span class="wm-lite">出</span><span class="wm-strong">尘</span><span class="wm-lite">入</span><span class="wm-strong">画</span></span><span class="g-en">尘归尘，画归画 · 21st Century</span></div>
+  <div class="g-brand"><span class="wm"><span class="wm-lite">出</span><span class="wm-strong">尘</span><span class="wm-lite">入</span><span class="wm-strong">画</span></span><span class="g-en"><span data-l="zh">尘归尘，画归画 · 21st Century</span><span data-l="en">Image as history · 21st Century</span></span></div>
   <nav class="g-nav">
-    <a href="https://www.chenhua.net/">尘画</a>
-    <a href="https://www.chenhua.net/stories/">主题</a>
-    <a href="https://www.chenhua.net/timeline/">时间线</a>
-    <a href="https://photo.chenhua.net/">摄影</a>
-    <a href="https://paint.chenhua.net/">绘画</a>
-    <a href="https://www.chenhua.net/search/">搜索</a>
-    <a href="https://netcn.org/">导航</a>
+    <a href="https://www.chenhua.net/"><span data-l="zh">尘画</span><span data-l="en">Chenhua</span></a>
+    <a href="https://www.chenhua.net/stories/"><span data-l="zh">主题</span><span data-l="en">Stories</span></a>
+    <a href="https://www.chenhua.net/timeline/"><span data-l="zh">时间线</span><span data-l="en">Timeline</span></a>
+    <a href="https://photo.chenhua.net/"><span data-l="zh">摄影</span><span data-l="en">Photography</span></a>
+    <a href="https://paint.chenhua.net/"><span data-l="zh">绘画</span><span data-l="en">Painting</span></a>
+    <a href="https://www.chenhua.net/search/"><span data-l="zh">搜索</span><span data-l="en">Search</span></a>
+    <a href="https://netcn.org/"><span data-l="zh">导航</span><span data-l="en">Directory</span></a>
   </nav>
+  <div class="g-tools">
+    <button class="g-tool g-lang" type="button" data-lang-toggle aria-label="切换到英文"><span data-l="zh">EN</span><span data-l="en">中</span></button>
+    <button class="g-tool" type="button" data-themebtn aria-label="切换到浅色">
+      <span class="icon-sun"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg></span>
+      <span class="icon-moon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.6A8.4 8.4 0 1 1 9.4 4a6.8 6.8 0 0 0 10.6 10.6z"/></svg></span>
+    </button>
+  </div>
 </header>
 <main class="g-wrap">
   <div class="g-intro">
     <h1>21st Century</h1>
-    <p>这是尘画的图片索引页。完整档案、许可与来源见摄影 / 绘画站；本页只做浏览入口。</p>
+    <p><span data-l="zh">这是尘画的图片索引页。完整档案、许可与来源见摄影 / 绘画站；本页只做浏览入口。</span><span data-l="en">An image index for Chenhua. The complete archive, licences and sources are on the Photography and Painting sites; this page is only an entrance.</span></p>
   </div>
   <div class="g-chips" id="gChips"></div>
   <div class="g-count" id="gCount">—</div>
   <div class="g-masonry" id="gMasonry"></div>
-  <div class="g-more"><button id="gMore" type="button">加载更多</button></div>
+  <div class="g-more"><button id="gMore" type="button"><span data-l="zh">加载更多</span><span data-l="en">Load more</span></button></div>
 </main>
 <footer class="g-foot">
   <nav>
-    <a href="https://www.chenhua.net/">尘画</a>
-    <a href="https://www.chenhua.net/stories/">主题</a>
-    <a href="https://www.chenhua.net/timeline/">时间线</a>
-    <a href="https://photo.chenhua.net/">摄影</a>
-    <a href="https://paint.chenhua.net/">绘画</a>
-    <a href="https://www.chenhua.net/search/">搜索</a>
-    <a href="https://netcn.org/">导航</a>
+    <a href="https://www.chenhua.net/"><span data-l="zh">尘画</span><span data-l="en">Chenhua</span></a>
+    <a href="https://www.chenhua.net/stories/"><span data-l="zh">主题</span><span data-l="en">Stories</span></a>
+    <a href="https://www.chenhua.net/timeline/"><span data-l="zh">时间线</span><span data-l="en">Timeline</span></a>
+    <a href="https://photo.chenhua.net/"><span data-l="zh">摄影</span><span data-l="en">Photography</span></a>
+    <a href="https://paint.chenhua.net/"><span data-l="zh">绘画</span><span data-l="en">Painting</span></a>
+    <a href="https://www.chenhua.net/search/"><span data-l="zh">搜索</span><span data-l="en">Search</span></a>
+    <a href="https://netcn.org/"><span data-l="zh">导航</span><span data-l="en">Directory</span></a>
   </nav>
-  <p>尘画 · 出尘入画 · 尘归尘，画归画</p>
-  <p><a href="https://www.chenhua.net/legal/">法律声明</a> · 影像版权归原作者与收藏机构</p>
+  <p><span data-l="zh">尘画 · 出尘入画 · 尘归尘，画归画</span><span data-l="en">Chenhua · Out of dust, into the image</span></p>
+  <p><a href="https://www.chenhua.net/legal/"><span data-l="zh">法律声明</span><span data-l="en">Legal notice</span></a> · <span data-l="zh">影像版权归原作者与收藏机构</span><span data-l="en">Image rights remain with the creators and holding institutions</span></p>
 </footer>
 <script>window.GALLERY_CONFIG = {"century": "21century", "photoBase": "https://photo.chenhua.net/", "paintBase": "https://paint.chenhua.net/", "photoStaticBase": "https://photo.chenhua.net/photo/", "paintStaticBase": "https://paint.chenhua.net/painting/", "mainBase": "https://www.chenhua.net/", "preview": false};</script>
-<script src="gallery.js?v=1794831751"></script>
+<script src="assets/site.js"></script>
+<script src="gallery.js?v=1794837793"></script>
 </body>
 </html>
