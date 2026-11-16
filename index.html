@@ -7,12 +7,12 @@
 <meta name="description" content="这是尘画的图片索引页。完整档案、许可与来源见摄影 / 绘画站；本页只做浏览入口。">
 <title>21st Century · 尘画图片索引</title>
 <link rel="alternate" hreflang="zh-CN" href="https://21century.chenhua.net/">
-<link rel="alternate" hreflang="en" href="https://21century.chenhua.net/">
-<link rel="stylesheet" href="gallery.css?v=1794837793">
+<link rel="alternate" hreflang="en" href="https://21century.chenhua.net/?lang=en">
+<link rel="stylesheet" href="gallery.css?v=1794838485">
 <script>
-(function(){try{var t=localStorage.getItem("chenhua-theme");if(t)document.documentElement.setAttribute("data-theme",t);
-var l=localStorage.getItem("chenhua-lang");if(l){document.documentElement.setAttribute("data-lang",l);
-document.documentElement.setAttribute("lang",l==="en"?"en":"zh-CN");}}catch(e){}})();
+(function(){try{var q=new URLSearchParams(location.search).get("lang");var l=q||localStorage.getItem("chenhua-lang");if(l==="en"){document.documentElement.setAttribute("data-lang","en");
+document.documentElement.setAttribute("lang","en");}
+var t=localStorage.getItem("chenhua-theme");if(!t&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches)t="light";if(t==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();
 </script>
 </head>
 <body data-title-zh="21st Century · 尘画图片索引" data-title-en="21st Century · Chenhua Image Index"
@@ -61,6 +61,6 @@ document.documentElement.setAttribute("lang",l==="en"?"en":"zh-CN");}}catch(e){}
 </footer>
 <script>window.GALLERY_CONFIG = {"century": "21century", "photoBase": "https://photo.chenhua.net/", "paintBase": "https://paint.chenhua.net/", "photoStaticBase": "https://photo.chenhua.net/photo/", "paintStaticBase": "https://paint.chenhua.net/painting/", "mainBase": "https://www.chenhua.net/", "preview": false};</script>
 <script src="assets/site.js"></script>
-<script src="gallery.js?v=1794837793"></script>
+<script src="gallery.js?v=1794838485"></script>
 </body>
 </html>
