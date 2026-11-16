@@ -2,7 +2,7 @@
  "century": "21century",
  "collection": "photos",
  "base_url": "https://21century.chenhua.net",
- "count": 66,
+ "count": 67,
  "images": [
   {
    "id": "auto-221fe4a6",
@@ -75,6 +75,24 @@
    "bytes": 248487,
    "width": 960,
    "height": 973
+  },
+  {
+   "id": "auto-b9cbae33",
+   "title": "Unity-Zarya-Zvezda STS-106 (2)",
+   "year": 2000,
+   "date_label": "2000-09-18",
+   "collection": "photos",
+   "content_type": "photograph",
+   "decade": "2000s",
+   "path": "photos/2000s/auto-b9cbae33-75c130ed.jpg",
+   "url": "https://21century.chenhua.net/photos/2000s/auto-b9cbae33-75c130ed.jpg",
+   "preview_url": "/next/images/21century/photos/2000s/auto-b9cbae33-75c130ed.jpg",
+   "detail_collection": "photos",
+   "detail_slug": "auto-b9cbae33",
+   "sha256": "c93c05c63cdbbc5af54ac76d02932181840310c6ea5ad0574818dd5c63e485b2",
+   "bytes": 377176,
+   "width": 1589,
+   "height": 1600
   },
   {
    "id": "auto-ccd8c3ac",
