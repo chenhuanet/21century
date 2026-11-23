@@ -107,7 +107,7 @@
   }
 
   function headSearchForm(href) {
-    var label = root.getAttribute("data-lang") === "en" ? "Search archive" : "搜索标题、地点或主题";
+    var label = root.getAttribute("data-lang") === "en" ? "Search themes, people, places" : "搜主题、人物、地点";
     var form = document.createElement("form");
     form.className = "head-search";
     form.setAttribute("role", "search");
@@ -125,6 +125,9 @@
     var gallery = header.classList.contains("g-head");
     var iconClass = gallery ? "g-tool" : "iconbtn";
     if (searchHref) {
+      Array.prototype.forEach.call(header.querySelectorAll(".head-search"), function (old) {
+        if (old.parentNode) old.parentNode.removeChild(old);
+      });
       var form = headSearchForm(searchHref);
       tools.parentNode.insertBefore(form, tools);
       header.className += " has-head-search";
@@ -150,8 +153,8 @@
       if (foot.querySelector(".sf-copy") || foot.querySelector(".sf-left")) return;
       var copy = document.createElement("span");
       copy.className = "sf-copy";
-      copy.innerHTML = '<span data-l="zh">© 2026 尘画 · <a href="https://www.chenhua.net">chenhua.net</a></span>' +
-        '<span data-l="en">© 2026 Frame & Grain · <a href="https://www.chenhua.net">chenhua.net</a></span>';
+      copy.innerHTML = '<span data-l="zh">© 2026 尘画 · <a href="https://chenhua.net">chenhua.net</a></span>' +
+        '<span data-l="en">© 2026 Frame & Grain · <a href="https://chenhua.net">chenhua.net</a></span>';
       foot.appendChild(copy);
     });
   }
@@ -167,16 +170,84 @@
     });
   }
 
+  var HEAD_NAV = [
+    ["https://chenhua.net/themes/", "主题", "Themes"],
+    ["https://chenhua.net/timeline/", "时间线", "Timeline"],
+    ["https://chenhua.net/today/calendar.html", "日历", "Calendar"],
+    ["https://photo.chenhua.net/", "摄影", "Photography"],
+    ["https://paint.chenhua.net/", "绘画", "Painting"],
+    ["https://netcn.org/", "导航", "Directory"]
+  ];
+  var FOOT_NAV = [
+    ["https://chenhua.net/", "出尘入画", '<span class="sf-brand-long">Frame &amp; Grain</span><span class="sf-brand-short">Frame</span>'],
+    ["https://chenhua.net/images/", "图片库", "Image Library"],
+    ["https://chenhua.net/themes/", "主题", "Themes"],
+    ["https://chenhua.net/timeline/", "时间线", "Timeline"],
+    ["https://chenhua.net/today/calendar.html", "日历", "Calendar"],
+    ["https://photo.chenhua.net/", "摄影", "Photography"],
+    ["https://paint.chenhua.net/", "绘画", "Painting"],
+    ["https://netcn.org/", "导航", "Directory"]
+  ];
+
+  function installGlobalNav() {
+    var host = location.hostname;
+    var path = location.pathname.replace(/\/index\.html$/, "/");
+    var kind = (host === "photo.chenhua.net" || path.indexOf("/photo/") === 0)
+      ? "photo"
+      : ((host === "paint.chenhua.net" || path.indexOf("/paint/") === 0) ? "paint" : "main");
+    function activeFor(href) {
+      if (href.indexOf("chenhua.net/themes/") >= 0) return kind === "main" && path.indexOf("/themes") >= 0;
+      if (href.indexOf("chenhua.net/timeline/") >= 0) return kind === "main" && path.indexOf("/timeline") >= 0;
+      if (href.indexOf("chenhua.net/today/") >= 0) return kind === "main" && path.indexOf("/today") >= 0;
+      if (href === "https://photo.chenhua.net/") return kind === "photo";
+      if (href === "https://paint.chenhua.net/") return kind === "paint";
+      return false;
+    }
+    function a(item) {
+      var href = item[0];
+      return '<a href="' + href + '"' + (activeFor(href) ? ' aria-current="page"' : '') +
+        '><span data-l="zh">' + item[1] + '</span><span data-l="en">' + item[2] + '</span></a>';
+    }
+    var head = HEAD_NAV.map(a);
+    var foot = FOOT_NAV.map(a);
+    var headHtml = head.join("");
+    var footHtml = foot.join("");
+    Array.prototype.forEach.call(document.querySelectorAll(".desknav, .masthead-nav, .g-nav"), function (nav) {
+      nav.innerHTML = headHtml;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".site-foot .sf-nav"), function (nav) {
+      nav.innerHTML = footHtml;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".brand, .g-brand"), function (brand) {
+      var link = brand.closest("a") || brand;
+      if (link && link.tagName === "A") link.setAttribute("href", "https://chenhua.net/");
+      var sub = brand.querySelector(".sub");
+      if (sub) sub.innerHTML = '<span data-l="zh">尘归尘，画归画</span><span data-l="en">Image as history</span>';
+      var mark = brand.querySelector("img.brand-mark");
+      if (mark) mark.setAttribute("src", "https://chenhua.net/assets/leaf/joy.svg");
+    });
+  }
+
   var searchHref = findSearchLink();
-  if (!searchHref) searchHref = "https://www.chenhua.net/search/";
+  if (!searchHref) searchHref = "https://chenhua.net/search/";
   removeSearchLinks();
   removeHomeNavLink();
   localizeBrand();
+  installGlobalNav();
   markFooterLinks();
   addFooterCopy();
   Array.prototype.forEach.call(document.querySelectorAll(".appbar, .masthead, .g-head"), function (header) {
     normalizeHeader(header, searchHref);
   });
+  function refreshGlobalNav() {
+    installGlobalNav();
+    markFooterLinks();
+  }
+  refreshGlobalNav();
+  [0, 180, 700, 1600].forEach(function (delay) {
+    setTimeout(refreshGlobalNav, delay);
+  });
+  window.addEventListener("load", refreshGlobalNav);
   var footCss = document.createElement("style");
   footCss.textContent =
     ".wm-en{display:none;font-family:var(--serif);font-size:18px;line-height:1;letter-spacing:.06em;color:var(--accent,#c8a24a);white-space:nowrap}" +
@@ -232,7 +303,7 @@
     });
     var hs = document.querySelector(".head-search input");
     if (hs) {
-      hs.setAttribute("placeholder", lang === "en" ? "Search archive" : "搜索标题、地点或主题");
+      hs.setAttribute("placeholder", lang === "en" ? "Search themes, people, places" : "搜主题、人物、地点");
       hs.setAttribute("aria-label", lang === "en" ? "Search" : "搜索");
     }
     var hsb = document.querySelector(".head-search button");
@@ -282,24 +353,37 @@
   ];
 
   function addTabbar() {
-    if (document.querySelector(".tabbar")) return;
-    var foot = document.querySelector(".site-foot .sf-nav");
-    if (!foot) return;
-    var links = Array.prototype.slice.call(foot.querySelectorAll("a"));
-    if (links.length < 6) return;
+    Array.prototype.forEach.call(document.querySelectorAll(".tabbar"), function (el) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    });
+    var links = FOOT_NAV.map(function (item) {
+      var a = document.createElement("a");
+      a.setAttribute("href", item[0]);
+      a.innerHTML = '<span data-l="zh">' + item[1] + '</span><span data-l="en">' + item[2] + "</span>";
+      return a;
+    });
     var current = location.pathname.replace(/\/index\.html$/, "/");
     var best = -1;
     var bestLen = -1;
     links.forEach(function (a, i) {
       try {
         var u = new URL(a.href, location.href);
-        if (u.origin === location.origin && u.pathname !== "/" &&
+        var sameHost = u.hostname === location.hostname;
+        if (!sameHost && kind === "main") {
+          sameHost = u.hostname.replace(/^www\./, "") === location.hostname.replace(/^www\./, "");
+        }
+        if (sameHost && u.pathname !== "/" &&
             current.indexOf(u.pathname) === 0 && u.pathname.length > bestLen) {
           best = i;
           bestLen = u.pathname.length;
         }
       } catch (e) {}
     });
+    if (best < 0) {
+      if (location.hostname === "photo.chenhua.net") best = 4;
+      else if (location.hostname === "paint.chenhua.net") best = 5;
+      else best = 0;
+    }
     function tabIconFor(a) {
       var href = (a.getAttribute("href") || "").toLowerCase();
       var label = textOf(a).toLowerCase();
@@ -327,7 +411,10 @@
         (i === best ? ' aria-current="page"' : "") + '>' +
         (TAB_ICONS[tabIconFor(a)] || "") + '<span class="tab-label">' + label + "</span></a>";
     });
-    var style = document.createElement("style");
+    var style = document.getElementById("site-tabbar-style");
+    if (!style) {
+    style = document.createElement("style");
+    style.id = "site-tabbar-style";
     style.textContent =
       ".site-tabbar{display:none}" +
       "html[data-lang=\"en\"] .site-tabbar [data-l=\"zh\"]{display:none}" +
@@ -350,8 +437,28 @@
       "body.has-site-tabbar .site-foot{margin-top:18px}" +
       "}";
     document.head.appendChild(style);
+    }
     document.body.appendChild(nav);
     document.body.classList.add("has-site-tabbar");
   }
-  addTabbar();
+
+  function ensureTabbar() {
+    var bars = document.querySelectorAll(".tabbar");
+    if (bars.length === 1 && bars[0].classList.contains("site-tabbar") &&
+        bars[0].querySelectorAll("a").length === FOOT_NAV.length) return;
+    addTabbar();
+  }
+
+  function bootTabbar() {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", ensureTabbar);
+    } else {
+      ensureTabbar();
+    }
+    window.addEventListener("load", ensureTabbar);
+    [0, 180, 700, 1600].forEach(function (delay) {
+      setTimeout(ensureTabbar, delay);
+    });
+  }
+  bootTabbar();
 })();
