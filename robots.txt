@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://21century.chenhua.net/sitemap.xml
